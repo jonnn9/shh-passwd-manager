@@ -22,3 +22,4 @@ shh gmail mypass123 # set a password for gmail
 shh gmail # copy to clipboard the password your set for gmail
 shh gmail newpass # update the password for gmail
 ```
+For more informations about the command run: `man shh`
