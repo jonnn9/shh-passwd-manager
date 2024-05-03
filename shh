@@ -1,0 +1,92 @@
+#! /bin/bash
+
+# Encrypt password
+encrypt_password() {
+    password="$1"; key="$2"
+
+    encrypted_password=$(echo -n "$password" | openssl enc -aes-256-cbc -a -pbkdf2 -salt -pass "pass:$key")
+
+    echo "$encrypted_password"
+}
+
+# Decrypt password
+decrypt_password() {
+    encrypted_password="$1";
+	key="$2"
+
+    decrypted_password=$(echo "$encrypted_password" | openssl enc -d -aes-256-cbc -a -pbkdf2 -salt -pass "pass:$key")
+
+    echo "$decrypted_password"
+}
+
+# Find password of a particular site
+find_password() {
+	# Get the password for the site
+	local PASSWORD=$(grep -i "^$SITE" "$DB_FILE_PATH" | cut -d' ' -f2)
+
+	# Check if the password is found
+	if [ -z "$PASSWORD" ]; then
+		echo "Password not found for $SITE"
+	else
+		echo "Password found! Decrypting..." && sleep 1
+		echo $(decrypt_password "$PASSWORD" "$ENCRYPTION_KEY") | xclip -selection clipboard
+		echo "Password decrypted successfully!"
+		echo "Password copied to clipboard!"
+	fi
+}
+
+# Function to add a new entry in the database
+create_entry() {
+	local ENTRY=$(grep -in "^$SITE" "$DB_FILE_PATH")
+	local LINE_NUMBER=$(echo "$EXISTING_SITE" | cut -d':' -f1)
+
+	if [[ ! -z "$ENTRY" ]]; then
+		echo "Entry already exists. Updating password..." && sleep 1
+
+		local ENCRYPTED_PASSWORD=$(encrypt_password "$PASSWORD" "$ENCRYPTION_KEY")
+
+		sed -i "${LINE_NUMBER}s/ .*$/ ${ENCRYPTED_PASSWORD}/" $DB_FILE_PATH
+		echo "Password updated successfully!"
+	else
+		echo "Adding credentials..." && sleep 1
+
+		local ENCRYPTED_PASSWORD=$(encrypt_password "$PASSWORD" "$ENCRYPTION_KEY")
+		echo "${SITE} ${ENCRYPTED_PASSWORD}" >> $DB_FILE_PATH
+
+		echo "Credentials added succesfully!"
+	fi
+}
+
+main() {
+	SITE=$1; PASSWORD=$2;
+
+	# Load environment variables from .env file
+	if [ -f .env ]; then
+		source .env
+	fi
+
+	# Check if site is provided
+	if [ -z "$SITE" ]; then
+		echo "Site is required!"
+		exit 1
+	fi
+
+	# Check if the database file exists
+	if [ ! -f "$DB_FILE_PATH" ]; then
+		echo "Database not found at path! Creating the database at ${DB_FILE_PATH}..." && sleep 1
+		touch "$DB_FILE_PATH" || { echo "Error creating the database file"; exit 1; }
+		echo "Database successfully created at ${DB_FILE_PATH}!"
+	fi
+
+	if [ -z "$PASSWORD" ]; then
+		# If password is not provided it means we need to find the password for the provided site.
+		find_password
+	else
+		# If password is provided we need to either update and existing entry or create an existing entry.
+		create_entry
+	fi
+}
+
+
+# Run the main function
+main "$@"
