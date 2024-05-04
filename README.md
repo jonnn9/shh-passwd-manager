@@ -1,6 +1,6 @@
-# 🤐🔒 `Shh` Password Manager
+# 🤐🔒 `shh` Password Manager
 
-Managing passwords doesn't have to be a hassle anymore! With **Shh**, your passwords are securely stored and easily accessible whenever you need them.
+Managing passwords doesn't have to be a hassle anymore! With **shh**, your passwords are securely stored and easily accessible whenever you need them.
 
 ## How it Works 🛠️
 * **Simple Setup**: Define your path to the database file and your secret encryption key in your `.env` file.
