@@ -4,10 +4,10 @@
 
 ## How is it working?
 
-1. You define your path to the db file & your secret encryption key in your .env file.
-2. The database is going the be automatically created at specified path.
-3. Each password is automatically encrypted.
-4. When you retrieve credentials for a particular site the password it's decrypted and the password is automatically copied to your clipboard, ready for you to paste it where you need it.
+* You define your path to the db file & your secret encryption key in your .env file.
+* The database is going the be automatically created at the path you specified.
+* Each password is automatically encrypted.
+* When you retrieve credentials for a particular site the password it's decrypted and the password is automatically copied to your clipboard, ready for you to paste it where you need it.
 
 ## Getting Started
 
