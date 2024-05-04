@@ -23,7 +23,7 @@ shh gmail
 # List all credentials
 shh ls # ex: id site username password
 # Remove credentials
-1. shh ls # to get the id of the credentials you want to remove
-2. shh rm [id]
+shh ls # to get the id of the credentials you want to remove
+shh rm [id]
 ```
 ### Dive deeper into command mastery: `man shh` 📚🔍
