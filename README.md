@@ -1,4 +1,4 @@
-# 🔒 `Shh` Password Manager
+# 🤐🔒 `Shh` Password Manager
 
 Managing passwords doesn't have to be a hassle anymore! With **Shh**, your passwords are securely stored and easily accessible whenever you need them.
 
