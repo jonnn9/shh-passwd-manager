@@ -28,7 +28,8 @@ check_args() {
 
 	# Check if the database file exists
 	if [ ! -f "$DB_FILE_PATH" ]; then
-		echo "❌ Database not found at path! Creating the database at ${DB_FILE_PATH}..."
+		echo "⌛ Database not found at path!"
+		echo "⌛ Creating the database at ${DB_FILE_PATH}..."
 		touch "$DB_FILE_PATH" || { echo "❌ Error creating the database file"; exit 1; }
 		echo "✅ Database successfully created at ${DB_FILE_PATH}!"
 	fi
@@ -41,10 +42,9 @@ find_credentials() {
 	if [ -z "$PASSWORD" ]; then
 		echo "❌ Password not found for $NAME!"
 	else
-		echo "Username: ${USERNAME} 😊"
-		echo "Password found! Decrypting... 😊"
+		echo "✅ Username: ${USERNAME} 😊"
 		echo $(decrypt_password "$PASSWORD" "$ENCRYPTION_KEY") | xclip -selection clipboard
-		echo "Password copied to clipboard!"
+		echo "✅ Password copied to clipboard! 📋"
 	fi
 }
 
@@ -67,7 +67,7 @@ create_credentials() {
 }
 
 delete_credentials() {
-	local NAME=$1; local ENTRY=$(grep -in "^$NAME" "$DB_FILE_PATH")
+	local ID=$1; local ENTRY=$(grep -in "^$ID" "$DB_FILE_PATH")
 
 	if [[ -z "$ENTRY" ]]; then
 		echo "❌ Entry doesn't exist."; exit 1
@@ -87,14 +87,14 @@ main() {
 	fi
 
 	case $1 in
-		--delete | del | rm | remove | delete)
+		--delete | del | rm | remove | delete | --remove)
 			if [ -z "$2" ]; then
-				echo "❌ You need to provide the id of the entry to delete. 🚫"; exit 1
+				echo "❌ You need to provide the id of the entry to delete!"; exit 1
 			else
 				shift; delete_credentials $1; exit 1
 			fi
 		;;
-		--list | ls)
+		--list | ls | list)
 			cat "$DB_FILE_PATH"; exit 1
 		;;
 	esac
