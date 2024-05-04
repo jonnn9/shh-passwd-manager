@@ -24,5 +24,7 @@ shh gmail
 shh ls
 # Remove credentials
 shh rm [id]
+# Generate 3 random passwords of length 25
+pwgen 25 3
 ```
 ### Dive deeper into command mastery: `man shh` 📚🔍
