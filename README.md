@@ -1,4 +1,4 @@
-# 🗣️🔐 *Whisper*: Ensuring Password Peace of Mind 🛡️🌟
+# 🗣️ *Whisper*: Ensuring Password Peace of Mind 🛡️🌟
 
 <p style="font-size: 18px">Managing passwords doesn't have to be a hassle anymore! With `whisper`, your passwords are securely stored and easily accessible whenever you need them right from your terminal.</p>
 
