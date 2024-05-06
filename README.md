@@ -1,6 +1,6 @@
 # 🗣️🔒 *Whisper* Is Your New Password Manager
 
-Managing passwords doesn't have to be a hassle anymore! With **whisper**, your passwords are securely stored and easily accessible whenever you need them right from your terminal.
+>Managing passwords doesn't have to be a hassle anymore! With `whisper`, your passwords are securely stored and easily accessible whenever you need them right from your terminal.
 
 ## How it Works 🛠️
 * **Simple Setup**: Define your path to the database file and your secret encryption key in your `.env` file.
