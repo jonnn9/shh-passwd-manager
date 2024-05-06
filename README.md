@@ -10,7 +10,7 @@
 ## Getting Started 🚀
 1. **Install Dependencies**: Run `./install_dependencies.sh` to install all required dependencies.
 2. **Set Environmental Variables**: Follow `.env.example` and set your environmental variables in your `.env` file.
-3. **Add to PATH**: Add the path of the directory to `$PATH` for convenient access, using `export PATH=$PATH:/home/jon/whisper`
+3. **Add to PATH**: Add the path of the directory to `$PATH` for convenient access, using `export PATH=$PATH:$HOME/whisper`
 4. **You're Ready!**: Start using the CLI to effortlessly manage your passwords. 💪
 
 ## Usage Examples 💡
